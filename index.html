@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para Maressa ❤️</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    background:linear-gradient(135deg,#fff5f7,#ffe9ef);
+    min-height:100vh;
+    overflow:hidden;
+}
+
+.screen{
+    width:100%;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    padding:30px;
+    text-align:center;
+}
+
+.hidden{
+    display:none;
+}
+
+.card{
+    background:white;
+    padding:30px;
+    border-radius:25px;
+    box-shadow:0 15px 35px rgba(0,0,0,.08);
+    width:100%;
+    max-width:420px;
+}
+
+button{
+    border:none;
+    background:#ff5c8a;
+    color:white;
+    padding:15px 28px;
+    border-radius:999px;
+    font-size:17px;
+    cursor:pointer;
+    margin-top:20px;
+    transition:.25s;
+}
+
+button:active{
+    transform:scale(.95);
+}
+
+.fade{
+    animation:fade .8s ease;
+}
+
+@keyframes fade{
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+.typing{
+    white-space:pre-line;
+    line-height:1.8;
+    color:#333;
+    min-height:180px;
+}
+
+.cursor{
+    animation:blink .8s infinite;
+}
+
+@keyframes blink{
+    50%{
+        opacity:0;
+    }
+}
+
+.polaroid{
+    background:white;
+    padding:12px 12px 40px;
+    border-radius:4px;
+    box-shadow:0 12px 30px rgba(0,0,0,.15);
+    transform:rotate(-2deg);
+    max-width:350px;
+}
+
+.polaroid img{
+    width:100%;
+    display:block;
+}
+
+.legenda{
+    margin-top:10px;
+    color:#666;
+    font-size:18px;
+}
+
+.bigText{
+    font-size:32px;
+    font-weight:700;
+    color:#333;
+}
+
+.question{
+    font-size:34px;
+    font-weight:700;
+    color:#333;
+    line-height:1.4;
+}
+
+.buttons{
+    position:relative;
+    width:100%;
+    height:200px;
+    margin-top:40px;
+}
+
+#btnSim{
+    position:absolute;
+    left:50%;
+    transform:translateX(-120%);
+}
+
+#btnNao{
+    position:absolute;
+    left:55%;
+}
+
+.status{
+    font-size:30px;
+    font-weight:bold;
+    color:#ff5c8a;
+}
+
+.final-msg{
+    margin-top:20px;
+    font-size:22px;
+    color:#444;
+}
+
+.heart{
+    position:fixed;
+    top:-20px;
+    animation:fall linear forwards;
+    pointer-events:none;
+}
+
+@keyframes fall{
+    to{
+        transform:translateY(110vh);
+    }
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- TELA 1 -->
+
+<div id="screen1" class="screen">
+
+<button onclick="startStory()">
+    ❤️ Clique aqui
+</button>
+
+
+</div>
+
+<!-- TELA 2 -->
+
+<div id="screen2" class="screen hidden">
+
+<div class="card fade">
+
+    <div id="text1" class="typing"></div>
+
+    <button id="next1" class="hidden" onclick="showPhoto()">
+        Continuar →
+    </button>
+
+</div>
+
+
+</div>
+
+<!-- TELA 3 -->
+
+<div id="screen3" class="screen hidden">
+
+
+<div class="polaroid fade">
+
+    <!-- TROQUE O NOME DA FOTO AQUI -->
+    <img src="foto.jpg" alt="Foto">
+
+    <div class="legenda">
+        ❤️
+    </div>
+
+</div>
+
+<button onclick="showLetter2()">
+    Continuar →
+</button>
+
+
+</div>
+
+<!-- TELA 4 -->
+
+<div id="screen4" class="screen hidden">
+
+
+<div class="card fade">
+
+    <div id="text2" class="typing"></div>
+
+    <button id="next2" class="hidden" onclick="lookAtMe()">
+        Última coisa...
+    </button>
+
+</div>
+
+
+</div>
+
+<!-- TELA OLHA PRA MIM -->
+
+<div id="screen5" class="screen hidden">
+
+
+<div id="lookText" class="bigText"></div>
+
+
+</div>
+
+<!-- PEDIDO -->
+
+<div id="screen6" class="screen hidden">
+
+
+<div id="question" class="question"></div>
+
+<div class="buttons">
+
+    <button id="btnSim" onclick="accepted()">
+        ❤️ SIM
+    </button>
+
+    <button id="btnNao">
+        🤔 NÃO
+    </button>
+
+</div>
+
+
+</div>
+
+<!-- FINAL -->
+
+<div id="screen7" class="screen hidden">
+
+
+<div class="status">
+    Status do relacionamento:
+    <br><br>
+    ❤️ Namorando ❤️
+</div>
+
+<div class="final-msg">
+    Você acabou de me fazer a pessoa mais feliz do mundo ❤️
+</div>
+
+
+</div>
+
+<script>
+
+// =======================
+// TEXTOS EDITÁVEIS
+// =======================
+
+const carta1 = `
+Oi, Princesa...
+
+Eu tava pensando em como eu poderia expressar meus sentimentos de uma forma única e individual. Queria criar algo que fosse bacana e que fizesse voce pensar em mim, então resolvi criar isso aqui pra expressar meu pensamento.
+`;
+
+const carta2 = `
+Essa foto representa o início de uma das decisões mais sinceras e fáceis que eu ja tive que tomar. Representa o meu amor por você que parece ter vindo de muito tempo atrás, de um tempo em que você existia apenas na minha mente, mas que eu ja desejava tanto sem saber que um dia você realmente iria aparecer pra mim.
+Em pouco tempo você se tornou alguem muito especial e eu simplesmente não consigo me imaginar com outra pessoa que não seja você.
+Tudo fluiu tão fácil e leve que chegou a ser um pouco duvidoso pra nós dois, mas nós sabemos que isso foi só o nosso lado humano tentando achar alguma justificativa pra tentar explicar a nossa conexão inexplicavel. Com isso, venho aqui te perguntar algo...
+`;
+
+// =======================
+
+function hideAll(){
+
+    document.querySelectorAll(".screen")
+    .forEach(el=>el.classList.add("hidden"));
+
+}
+
+function typeText(element,text,speed,callback){
+
+    let i=0;
+
+    function typing(){
+
+        if(i<text.length){
+
+            element.innerHTML =
+            text.substring(0,i+1) +
+            '<span class="cursor">|</span>';
+
+            i++;
+
+            setTimeout(typing,speed);
+
+        }else{
+
+            element.innerHTML=text;
+
+            if(callback) callback();
+
+        }
+
+    }
+
+    typing();
+
+}
+
+function startStory(){
+
+    hideAll();
+
+    document
+    .getElementById("screen2")
+    .classList.remove("hidden");
+
+    typeText(
+        document.getElementById("text1"),
+        carta1,
+        35,
+        ()=>{
+            document
+            .getElementById("next1")
+            .classList.remove("hidden");
+        }
+    );
+
+}
+
+function showPhoto(){
+
+    hideAll();
+
+    document
+    .getElementById("screen3")
+    .classList.remove("hidden");
+
+}
+
+function showLetter2(){
+
+    hideAll();
+
+    document
+    .getElementById("screen4")
+    .classList.remove("hidden");
+
+    typeText(
+        document.getElementById("text2"),
+        carta2,
+        35,
+        ()=>{
+            document
+            .getElementById("next2")
+            .classList.remove("hidden");
+        }
+    );
+
+}
+
+function lookAtMe(){
+
+    hideAll();
+
+    document
+    .getElementById("screen5")
+    .classList.remove("hidden");
+
+    typeText(
+        document.getElementById("lookText"),
+        "Maressa...\n\nOlha pra mim ❤️",
+        80,
+        ()=>{
+
+            setTimeout(showQuestion,3000);
+
+        }
+    );
+
+}
+
+function showQuestion(){
+
+    hideAll();
+
+    document
+    .getElementById("screen6")
+    .classList.remove("hidden");
+
+    typeText(
+        document.getElementById("question"),
+        "Você aceita namorar comigo? ❤️",
+        80
+    );
+
+}
+
+const btnNao =
+document.getElementById("btnNao");
+
+btnNao.addEventListener("mouseover",moveButton);
+btnNao.addEventListener("click",moveButton);
+
+function moveButton(){
+
+    const maxX =
+    window.innerWidth - 150;
+
+    const maxY =
+    window.innerHeight - 100;
+
+    btnNao.style.left =
+    Math.random()*maxX + "px";
+
+    btnNao.style.top =
+    Math.random()*maxY + "px";
+
+}
+
+function accepted(){
+
+    hideAll();
+
+    document
+    .getElementById("screen7")
+    .classList.remove("hidden");
+
+    hearts();
+
+}
+
+function hearts(){
+
+    setInterval(()=>{
+
+        const heart =
+        document.createElement("div");
+
+        heart.classList.add("heart");
+
+        heart.innerHTML="❤️";
+
+        heart.style.left=
+        Math.random()*100+"vw";
+
+        heart.style.fontSize=
+        (20+Math.random()*25)+"px";
+
+        heart.style.animationDuration=
+        (3+Math.random()*3)+"s";
+
+        document.body.appendChild(heart);
+
+        setTimeout(()=>{
+
+            heart.remove();
+
+        },6000);
+
+    },250);
+
+}
+
+</script>
+
+</body>
+</html>
