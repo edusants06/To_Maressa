@@ -38,11 +38,17 @@ body{
 
 .card{
     background:white;
-    padding:30px;
+    padding:25px;
     border-radius:25px;
     box-shadow:0 15px 35px rgba(0,0,0,.08);
+    
     width:100%;
     max-width:420px;
+    
+    height:70vh;
+
+    display:flex;
+    flex-direction:column;
 }
 
 button{
@@ -80,9 +86,23 @@ button:active{
     white-space:pre-line;
     line-height:1.8;
     color:#333;
-    min-height:180px;
+
+    flex:1;
+    overflow-y:auto;
+    text-align:left;
+    padding-right:5px;
+    
 }
 
+.typing::-webkit-scrollbar{
+    width:6px;
+}    
+
+.typing::-webkit-scrollbar-thumb{
+    background:#ff5c8a;
+    border-radius:999px;
+    
+}        
 .cursor{
     animation:blink .8s infinite;
 }
